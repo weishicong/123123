@@ -12,8 +12,8 @@ int LNRS_dp(char *in)
      int i, j;
      int len = strlen(in);
      int last = 0;     // 上一次最长子串的起始位置
-     int maxlen,maxindex;
-     maxlen = maxindex = 0;
+     int maxlen;
+     maxlen = 0;
   
      dp[0] = 1;
      for(i = 1; i < len; ++i)
