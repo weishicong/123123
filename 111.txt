@@ -1,0 +1,49 @@
+#include <cstdio>
+#include <cstdlib>
+#include <string.h>
+ 
+using namespace std;
+char in[30001];
+ 
+int dp[30001];
+
+int LNRS_dp(char *in)
+ {
+     int i, j;
+     int len = strlen(in);
+     int last = 0;     // 上一次最长子串的起始位置
+     int maxlen,maxindex;
+     maxlen = maxindex = 0;
+  
+     dp[0] = 1;
+     for(i = 1; i < len; ++i)
+     {
+         for(j = i-1; j >= last; --j) // 遍历到上一次最长子串起始位
+         {
+             if(in[j] == in[i])
+             {
+                 dp[i] = i - j;
+                 last = j+1; // 更新last_start
+                 break;
+             }else if(j == last) // 无重复
+             {
+                 dp[i] = dp[i-1] + 1;//长度+1 
+             }
+         }
+         if(dp[i] > maxlen)
+         {
+             maxlen = dp[i];
+         }
+     }
+     return maxlen;
+ }
+ 
+ int main()
+ {
+
+      while(scanf("%s",in)!=EOF)
+      {
+           printf("%d\n",LNRS_dp(in));
+      }
+      return 0;
+ }
